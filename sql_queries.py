@@ -98,7 +98,19 @@ VALUES (%s, %s, %s, %s, %s, %s, %s)
 
 # FIND SONGS
 
-song_select = ()
+song_select = ("""
+    SELECT DISTINCT
+        s.song_id,
+        s.artist_id
+    FROM
+        songs AS s
+        JOIN artists AS a
+        ON s.artist_id = a.artist_id
+    WHERE
+        s.title = %s
+        AND a.name = %s
+        AND s.duration = %s
+""")
 
 # QUERY LISTS
 
