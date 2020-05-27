@@ -3,6 +3,16 @@ from sql_queries import create_table_queries, drop_table_queries
 
 
 def create_database():
+    """
+    Create database at host=127.0.0.1 dbname=sparkifydb.
+    
+    Arguments:
+        None
+    Returns:
+        cur: object from https://www.psycopg.org/docs/cursor.html.
+        conn: object from https://www.psycopg.org/docs/connection.html.
+    """
+
     # connect to default database
     conn = psycopg2.connect("host=127.0.0.1 dbname=studentdb user=student password=student")
     conn.set_session(autocommit=True)
@@ -23,12 +33,30 @@ def create_database():
 
 
 def drop_tables(cur, conn):
+    """
+    Execute sql_queries.drop_table_queries from dbname=sparkifydb.
+    
+    Arguments:
+        cur: object from https://www.psycopg.org/docs/cursor.html.
+        conn: object from https://www.psycopg.org/docs/connection.html.
+    Returns:
+        None
+    """
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
+    """
+    Execute sql_queries.create_table_queries into dbname=sparkifydb.
+    
+    Arguments:
+        cur: object from https://www.psycopg.org/docs/cursor.html.
+        conn: object from https://www.psycopg.org/docs/connection.html.
+    Returns:
+        None
+    """
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()
